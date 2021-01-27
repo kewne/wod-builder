@@ -2,9 +2,12 @@
 import ReactDOM from 'react-dom';
 import React, { useState } from 'react';
 
-const ListItem = ({ item }) => <li>{item}</li>
 
-const List = ({ items }) => <ul>{items.map(item => <ListItem item={item} />)}</ul>
+const Workout = ({ items }) => {
+    const WorkoutItem = ({ item }) => <li>{item}</li>
+
+    return <ol>{items.map(item => <WorkoutItem key={item} item={item} />)}</ol>
+}
 
 const exercises = ["Back Squat", "Run", "Push-up"]
 
@@ -22,7 +25,7 @@ const App = () => {
     const [workout, setWorkout] = useState([])
     const appendToWorkout = item => setWorkout(workout.concat(item))
     return (<div>
-        <List items={workout} />
+        <Workout items={workout} />
         <ExercisePicker onSelect={appendToWorkout} />
     </div>)
 }
