@@ -16,4 +16,7 @@ Since I'm at it, I also take the chance to improve the naming
 and, [as I alluded to previously]({{site.baseurl}}{% post_url 2021-01-24-Starting %}),
 inline `WorkoutItem` into `Workout`.
 
-I then [commit my changes.]()
+I then [commit my changes.](https://github.com/kewne/wod-builder/commit/b43601a2832f39313274fa436062222eed0aee54)
+
+I was hoping to get more done in this session but, unfortunately,
+I had to take care of some other things.
