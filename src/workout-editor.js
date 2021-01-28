@@ -15,7 +15,7 @@ const WorkoutEditor = ({ items }) => {
 
     return (
         <form>
-            <ol>{items.map(item => <WorkoutItem key={item} item={item} />)}</ol>
+            <ol>{items.map((item, idx) => <WorkoutItem key={idx} item={item} />)}</ol>
         </form>)
 }
 

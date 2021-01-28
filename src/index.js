@@ -2,7 +2,7 @@
 import ReactDOM from 'react-dom';
 import React, { useState } from 'react';
 
-import Workout from './workout-editor'
+import WorkoutEditor from './workout-editor'
 
 const exercises = ["Back Squat", "Run", "Push-up"]
 
@@ -13,14 +13,14 @@ const ExercisePicker = ({ onSelect }) => {
         }
         return <button onClick={select}>{ex}</button>
     }
-    return <ul>{exercises.map(ex => <li><ExerciseButton key={ex} ex={ex} /></li>)}</ul>
+    return <ul>{exercises.map(ex => <li key={ex}><ExerciseButton ex={ex} /></li>)}</ul>
 }
 
 const App = () => {
     const [workout, setWorkout] = useState([])
     const appendToWorkout = item => setWorkout(workout.concat(item))
     return (<div>
-        <Workout items={workout} />
+        <WorkoutEditor items={workout} />
         <ExercisePicker onSelect={appendToWorkout} />
     </div>)
 }
