@@ -26,7 +26,7 @@ const App = () => {
         setWorkout([])
     }
     return (<div>
-        <WorkoutEditor items={workout} onSubmit={() => saveNewWorkout(workout)} />
+        <WorkoutEditor items={workout} onSave={() => saveNewWorkout(workout)} />
         <ExercisePicker onSelect={appendToWorkout} />
         <div>
             <h3>Workout Library</h3>
