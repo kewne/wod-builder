@@ -4,6 +4,7 @@ module.exports = {
     devServer: {
         "contentBase": "./dist"
     },
+    devtool: 'inline-source-map',
     module: {
         rules: [
             {
