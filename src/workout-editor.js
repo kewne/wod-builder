@@ -1,21 +1,27 @@
 'use strict';
 import ReactDOM from 'react-dom';
-import React, { useState } from 'react';
+import React from 'react';
 
 
-const WorkoutEditor = ({ items }) => {
-    const WorkoutItem = ({ item }) => (
+const WorkoutEditor = ({ items, onSubmit }) => {
+
+    const WorkoutItem = ({ item, note }) => (
         <li>
             <label>
-                <input type='text' />
+                <input type='text' value={note} readOnly={true} />
                 {item}
             </label>
         </li>
     )
 
+
     return (
-        <form>
-            <ol>{items.map((item, idx) => <WorkoutItem key={idx} item={item} />)}</ol>
+        <form onSubmit={onSubmit}>
+            <ol>
+                {items.map((item, idx) =>
+                    <WorkoutItem key={idx} item={item.name} note={item.note} />)}
+            </ol>
+            {items.length ? <input type="submit" value="Save" /> : null}
         </form>)
 }
 
