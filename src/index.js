@@ -5,28 +5,14 @@ import React, { useState } from 'react';
 import WorkoutEditor from './workout-editor'
 import { get as getWorkout, save as saveWorkout } from './workout-library'
 
-const exercises = ["Back Squat", "Run", "Push-up"]
-
-const ExercisePicker = ({ onSelect }) => {
-    const ExerciseButton = ({ ex }) => {
-        const select = () => {
-            onSelect(ex)
-        }
-        return <button onClick={select}>{ex}</button>
+const App = ({ getSavedWorkout, onWorkoutSaved }) => {
+    const [savedWorkout, setSavedWorkout] = useState(getSavedWorkout() || []);
+    const handleSave = (workout) => {
+        onWorkoutSaved(workout);
+        setSavedWorkout(workout);
     }
-    return <ul>{exercises.map(ex => <li key={ex}><ExerciseButton ex={ex} /></li>)}</ul>
-}
-
-const App = ({ getSavedWorkout, setSavedWorkout }) => {
-    const appendToWorkout = exercise => {
-        console.info("Appending '%s' to the workout", exercise);
-        // setWorkout(workout.concat({ name: exercise, note: "3x12" }));
-    }
-
-    const savedWorkout = getSavedWorkout() || [];
     return (<div>
-        <WorkoutEditor onSave={setSavedWorkout} />
-        <ExercisePicker onSelect={appendToWorkout} />
+        <WorkoutEditor onSave={handleSave} />
         <div>
             <h3>Workout Library</h3>
             <ul>
@@ -37,4 +23,4 @@ const App = ({ getSavedWorkout, setSavedWorkout }) => {
 }
 
 const element = document.querySelector('#app');
-ReactDOM.render(<App getSavedWorkout={getWorkout} setSavedWorkout={saveWorkout} />, element);
+ReactDOM.render(<App getSavedWorkout={getWorkout} onWorkoutSaved={saveWorkout} />, element);
