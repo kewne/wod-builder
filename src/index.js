@@ -27,7 +27,7 @@ const App = ({ getSavedWorkout, setSavedWorkout }) => {
     }
     const savedWorkout = getSavedWorkout() || [];
     return (<div>
-        <WorkoutEditor items={workout} onSave={() => saveNewWorkout(workout)} />
+        <WorkoutEditor workout={workout} onSave={() => saveNewWorkout(workout)} />
         <ExercisePicker onSelect={appendToWorkout} />
         <div>
             <h3>Workout Library</h3>

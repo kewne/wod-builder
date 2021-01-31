@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 
 
-const WorkoutEditor = ({ items, onSave }) => {
+const WorkoutEditor = ({ workout, onSave }) => {
 
-    const WorkoutItem = ({ item, note }) => (
+    const WorkoutExercise = ({ name, note }) => (
         <li>
             <label>
                 <input type='text' value={note} readOnly={true} />
-                {item}
+                {name}
             </label>
         </li>
     )
@@ -22,10 +22,10 @@ const WorkoutEditor = ({ items, onSave }) => {
     return (
         <form onSubmit={handleSubmit}>
             <ol>
-                {items.map((item, idx) =>
-                    <WorkoutItem key={idx} item={item.name} note={item.note} />)}
+                {workout.map((exercise, idx) =>
+                    <WorkoutExercise key={idx} {...exercise} />)}
             </ol>
-            {items.length ? <input type="submit" value="Save" /> : null}
+            {workout.length ? <input type="submit" value="Save" /> : null}
         </form>)
 }
 
