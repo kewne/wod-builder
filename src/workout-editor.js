@@ -1,9 +1,10 @@
 'use strict';
 import ReactDOM from 'react-dom';
-import React from 'react';
+import React, { useState } from 'react';
 
 
-const WorkoutEditor = ({ workout, onSave }) => {
+const WorkoutEditor = ({ onSave }) => {
+    const [workout, setWorkout] = useState([])
 
     const WorkoutExercise = ({ name, note }) => (
         <li>
