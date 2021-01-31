@@ -30,6 +30,7 @@ const WorkoutEditor = ({ onSave }) => {
     const handleSubmit = (event) => {
         console.info("Saving workout...")
         onSave(workout);
+        setWorkout([])
         event.preventDefault();
     }
 
