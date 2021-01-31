@@ -16,7 +16,7 @@ const WorkoutEditor = ({ onSave }) => {
     )
 
     const handleSubmit = (event) => {
-        onSave();
+        onSave(workout);
         event.preventDefault();
     }
 

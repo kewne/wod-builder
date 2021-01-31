@@ -18,16 +18,14 @@ const ExercisePicker = ({ onSelect }) => {
 }
 
 const App = ({ getSavedWorkout, setSavedWorkout }) => {
-    const [workout, setWorkout] = useState([])
-    const appendToWorkout = exercise => setWorkout(workout.concat({ name: exercise, note: "3x12" }))
-
-    const saveNewWorkout = (workout) => {
-        setSavedWorkout(workout);
-        setWorkout([]);
+    const appendToWorkout = exercise => {
+        console.info("Appending '%s' to the workout", exercise);
+        // setWorkout(workout.concat({ name: exercise, note: "3x12" }));
     }
+
     const savedWorkout = getSavedWorkout() || [];
     return (<div>
-        <WorkoutEditor workout={workout} onSave={() => saveNewWorkout(workout)} />
+        <WorkoutEditor onSave={setSavedWorkout} />
         <ExercisePicker onSelect={appendToWorkout} />
         <div>
             <h3>Workout Library</h3>
