@@ -17,28 +17,26 @@ const ExercisePicker = ({ onSelect }) => {
     return <ul>{exercises.map(ex => <li key={ex}><ExerciseButton ex={ex} /></li>)}</ul>
 }
 
-const App = ({ getSavedWorkout, saveWorkout }) => {
+const App = ({ getSavedWorkout, setSavedWorkout }) => {
     const [workout, setWorkout] = useState([])
     const appendToWorkout = exercise => setWorkout(workout.concat({ name: exercise, note: "3x12" }))
 
     const saveNewWorkout = (workout) => {
-        saveWorkout(workout);
+        setSavedWorkout(workout);
         setWorkout([]);
     }
-    if (!getSavedWorkout) {
-        getSavedWorkout = () =>  [];
-    }
+    const savedWorkout = getSavedWorkout() || [];
     return (<div>
         <WorkoutEditor items={workout} onSave={() => saveNewWorkout(workout)} />
         <ExercisePicker onSelect={appendToWorkout} />
         <div>
             <h3>Workout Library</h3>
             <ul>
-                {getSavedWorkout().map((exs, idx) => <li key={idx}>{exs.note} {exs.name}</li>)}
+                {savedWorkout.map((exs, idx) => <li key={idx}>{exs.note} {exs.name}</li>)}
             </ul>
         </div>
     </div>)
 }
 
 const element = document.querySelector('#app');
-ReactDOM.render(<App getSavedWorkout={getWorkout} setSaveWorkout={saveWorkout} />, element);
+ReactDOM.render(<App getSavedWorkout={getWorkout} setSavedWorkout={saveWorkout} />, element);
