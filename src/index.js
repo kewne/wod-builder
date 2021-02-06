@@ -12,7 +12,7 @@ const App = ({ getSavedWorkout, onWorkoutSaved }) => {
         setSavedWorkout(workout);
     }
     return (<div>
-        <WorkoutEditor onSave={handleSave} />
+        <WorkoutEditor initialWorkout={[]} onSave={handleSave} />
         <div>
             <h3>Workout Library</h3>
             <WorkoutLibrary workouts={savedWorkout} />

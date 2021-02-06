@@ -28,8 +28,8 @@ const WorkoutExercise = ({ name, note, onNoteUpdated }) => {
 )
     }
 
-const WorkoutEditor = ({ onSave }) => {
-    const [workout, setWorkout] = useState([])
+const WorkoutEditor = ({ initialWorkout, onSave }) => {
+    const [workout, setWorkout] = useState(initialWorkout)
 
     const handleSubmit = (event) => {
         console.info("Saving workout...")
