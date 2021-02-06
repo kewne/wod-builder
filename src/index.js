@@ -7,12 +7,19 @@ import { get as getWorkout, save as saveWorkout, WorkoutLibrary } from './workou
 
 const App = ({ getSavedWorkout, onWorkoutSaved }) => {
     const [savedWorkout, setSavedWorkout] = useState(getSavedWorkout() || []);
+    const [editableWorkout, setEditableWorkout] = useState(null)
+
     const handleSave = (workout) => {
         onWorkoutSaved(workout);
         setSavedWorkout(workout);
+        setEditableWorkout(null)
     }
+
+    const createEditor = <WorkoutEditor initialWorkout={[]} onSave={handleSave} />
+    const updateEditor = <WorkoutEditor initialWorkout={editableWorkout} onSave={handleSave} />
+
     return (<div>
-        <WorkoutEditor initialWorkout={[]} onSave={handleSave} />
+        {editableWorkout === null ? createEditor : updateEditor}
         <div>
             <h3>Workout Library</h3>
             <WorkoutLibrary workouts={savedWorkout} />
