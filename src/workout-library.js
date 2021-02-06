@@ -1,4 +1,5 @@
 'use strict';
+import React from 'react'
 
 function save(workout) {
     localStorage.setItem("workout", JSON.stringify(workout))
@@ -9,4 +10,10 @@ function get() {
     return workoutJson ? JSON.parse(workoutJson) : null
 }
 
-export {get, save}
+const WorkoutLibrary = ({workouts}) => {
+    return <ul>
+        {workouts.map((exs, idx) => <li key={idx}>{exs.note} {exs.name}</li>)}
+    </ul>
+}
+
+export { get, save, WorkoutLibrary}

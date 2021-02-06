@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import React, { useState } from 'react';
 
 import WorkoutEditor from './workout-editor'
-import { get as getWorkout, save as saveWorkout } from './workout-library'
+import { get as getWorkout, save as saveWorkout, WorkoutLibrary } from './workout-library'
 
 const App = ({ getSavedWorkout, onWorkoutSaved }) => {
     const [savedWorkout, setSavedWorkout] = useState(getSavedWorkout() || []);
@@ -15,9 +15,7 @@ const App = ({ getSavedWorkout, onWorkoutSaved }) => {
         <WorkoutEditor onSave={handleSave} />
         <div>
             <h3>Workout Library</h3>
-            <ul>
-                {savedWorkout.map((exs, idx) => <li key={idx}>{exs.note} {exs.name}</li>)}
-            </ul>
+            <WorkoutLibrary workouts={savedWorkout} />
         </div>
     </div>)
 }
