@@ -14,18 +14,22 @@ const ExercisePicker = ({ onSelect }) => {
     return <ul>{exercises.map(ex => <li key={ex}><ExerciseButton ex={ex} /></li>)}</ul>
 }
 
+const WorkoutExercise = ({ name, note, onNoteUpdated }) => {
+    function handleNoteUpdated(event) {
+        onNoteUpdated(event.target.value)
+    }
+    return (
+    <li>
+        <label>
+            <input type='text' value={note} onChange={handleNoteUpdated} />
+            {name}
+        </label>
+    </li>
+)
+    }
 
 const WorkoutEditor = ({ onSave }) => {
     const [workout, setWorkout] = useState([])
-
-    const WorkoutExercise = ({ name, note }) => (
-        <li>
-            <label>
-                <input type='text' value={note} readOnly={true} />
-                {name}
-            </label>
-        </li>
-    )
 
     const handleSubmit = (event) => {
         console.info("Saving workout...")
@@ -36,14 +40,20 @@ const WorkoutEditor = ({ onSave }) => {
 
     const appendToWorkout = exercise => {
         console.info("Appending '%s' to the workout", exercise);
-        setWorkout(workout.concat({ name: exercise, note: "3x12" }));
+        setWorkout(workout.concat({ name: exercise, note: "" }));
+    }
+
+    function handleNoteUpdated(idx, note) {
+        const newWorkout = [...workout]
+        newWorkout[idx].note  = note
+        setWorkout(newWorkout)
     }
 
     return <div>
         <form onSubmit={handleSubmit}>
             <ol>
                 {workout.map((exercise, idx) =>
-                    <WorkoutExercise key={idx} {...exercise} />)}
+                    <WorkoutExercise key={idx} {...exercise} onNoteUpdated={(note) => handleNoteUpdated(idx, note)} />)}
             </ol>
             {workout.length ? <input type="submit" value="Save" /> : null}
         </form>
