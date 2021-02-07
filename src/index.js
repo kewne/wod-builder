@@ -22,7 +22,7 @@ const App = ({ getSavedWorkout, onWorkoutSaved }) => {
         {editableWorkout === null ? createEditor : updateEditor}
         <div>
             <h3>Workout Library</h3>
-            <WorkoutLibrary workouts={savedWorkout} />
+            <WorkoutLibrary workouts={[savedWorkout]} />
         </div>
     </div>)
 }

@@ -10,10 +10,16 @@ function get() {
     return workoutJson ? JSON.parse(workoutJson) : null
 }
 
-const WorkoutLibrary = ({workouts}) => {
+const WorkoutLibraryEntry = ({ workout }) => <div>
+    <ol>
+        {workout.map((ex, idx) => <li key={idx}>{ex.note} {ex.name}</li>)}
+    </ol>
+</div>
+
+const WorkoutLibrary = ({ workouts }) => {
     return <ul>
-        {workouts.map((exs, idx) => <li key={idx}>{exs.note} {exs.name}</li>)}
+        {workouts.map((workout, idx) => <WorkoutLibraryEntry key={idx} workout={workout} />)}
     </ul>
 }
 
-export { get, save, WorkoutLibrary}
+export { get, save, WorkoutLibrary }
