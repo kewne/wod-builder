@@ -15,8 +15,8 @@ const App = ({ getSavedWorkout, onWorkoutSaved }) => {
         setEditableWorkout(null)
     }
 
-    const createEditor = <WorkoutEditor initialWorkout={[]} onSave={handleSave} />
-    const updateEditor = <WorkoutEditor initialWorkout={editableWorkout} onSave={handleSave} />
+    const createEditor = <WorkoutEditor key="create" initialWorkout={[]} onSave={handleSave} />
+    const updateEditor = <WorkoutEditor key="update" initialWorkout={editableWorkout} onSave={handleSave} />
 
     return (<div>
         {editableWorkout === null ? createEditor : updateEditor}
