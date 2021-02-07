@@ -10,15 +10,27 @@ function get() {
     return workoutJson ? JSON.parse(workoutJson) : null
 }
 
-const WorkoutLibraryEntry = ({ workout }) => <div>
-    <ol>
-        {workout.map((ex, idx) => <li key={idx}>{ex.note} {ex.name}</li>)}
-    </ol>
-</div>
+const WorkoutLibraryEntry = ({ workout, onSelected }) => {
+    const handleClick = (event) => {
+        console.debug("Workout from library selected", workout)
+        onSelected(workout)
+        event.preventDefault()
+    }
 
-const WorkoutLibrary = ({ workouts }) => {
+    return <div>
+        <ol>
+            {workout.map((ex, idx) => <li key={idx}>{ex.note} {ex.name}</li>)}
+        </ol>
+        <button type="button" onClick={handleClick}>Edit</button>
+    </div>
+}
+
+const WorkoutLibrary = ({ workouts, onWorkoutSelected }) => {
     return <ul>
-        {workouts.map((workout, idx) => <WorkoutLibraryEntry key={idx} workout={workout} />)}
+        {workouts.map((workout, idx) =>
+            <li key={idx}>
+                <WorkoutLibraryEntry workout={workout} onSelected={onWorkoutSelected} />
+            </li>)}
     </ul>
 }
 
