@@ -56,3 +56,6 @@ modeling this behavior incorrectly, so I decide to use
 the easiest solution (defining `key`s) while I digest the 
 issue.
 [Time to commit](https://github.com/kewne/wod-builder/commit/41db8f4a5fb374c0bbac51cf313e235636b20df2) and close shop for today.
+
+> It turns out [this article on the react blog](https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key)
+suggests exactly this solution, so I'm going to leave it as is for now.
