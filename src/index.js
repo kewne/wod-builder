@@ -1,9 +1,10 @@
 'use strict';
 import ReactDOM from 'react-dom';
 import React from 'react';
+
+import { InMemoryRepository } from './workout'
 import App from './components/app'
 
-import { get as getWorkout, save as saveWorkout } from './components/workout/library'
-
+const workoutRepository = new InMemoryRepository()
 const element = document.querySelector('#app');
-ReactDOM.render(<App getSavedWorkout={getWorkout} onWorkoutSaved={saveWorkout} />, element);
+ReactDOM.render(<App workoutRepository={workoutRepository} />, element);
