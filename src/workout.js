@@ -26,4 +26,8 @@ class InMemoryRepository {
     }
 }
 
-export { InMemoryRepository }
+async function inMemoryRepository() {
+    return new InMemoryRepository()
+}
+
+export { inMemoryRepository }

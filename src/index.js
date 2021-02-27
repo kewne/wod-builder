@@ -1,10 +1,10 @@
 'use strict';
 import ReactDOM from 'react-dom';
 import React from 'react';
+import "regenerator-runtime/runtime";
 
-import { InMemoryRepository } from './workout'
+import { inMemoryRepository } from './workout'
 import App from './components/app'
 
-const workoutRepository = new InMemoryRepository()
 const element = document.querySelector('#app');
-ReactDOM.render(<App workoutRepository={workoutRepository} />, element);
+ReactDOM.render(<App repoPromise={inMemoryRepository()} />, element);

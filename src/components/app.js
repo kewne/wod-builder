@@ -1,7 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import WorkoutEditor from './workout/editor'
 import { WorkoutLibrary } from './workout/library'
+
+const WaitLoadApp = ({ repoPromise }) => {
+    const [status, setStatus] = useState({ status: "initializing" })
+
+    useEffect(() => {
+        repoPromise.then(
+            (result) => setStatus({ status: "success", value: result }),
+            (reason) => setStatus({ status: "failed", value: reason })
+        )
+    }, [])
+    switch (status.status) {
+        case "success": return <App workoutRepository={status.value} />
+        case "failed": return <span>Failed to initialize app: <pre>{status.value}</pre></span>
+        default: return <span>Initializing, please wait...</span>
+    }
+}
 
 const App = ({ workoutRepository }) => {
     const [savedWorkouts, setSavedWorkouts] = useState(workoutRepository.getAll());
@@ -29,4 +45,4 @@ const App = ({ workoutRepository }) => {
     </div>)
 }
 
-export default App
+export default WaitLoadApp
