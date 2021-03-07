@@ -9,7 +9,7 @@ class InMemoryRepository {
         return (id >= 0 || id < this.workouts.length)
     }
 
-    save(workout, id) {
+    async save(workout, id) {
         if (id === undefined) {
             this.workouts.push(workout)
             console.info("Saved new workout", workout, this.workouts.length)
@@ -21,7 +21,7 @@ class InMemoryRepository {
         return id
     }
 
-    getAll() {
+    async getAll() {
         return this.workouts.map((w, idx) => ({ id: idx, value: w }))
     }
 }

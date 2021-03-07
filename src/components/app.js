@@ -20,28 +20,33 @@ const WaitLoadApp = ({ repoPromise }) => {
 }
 
 const App = ({ workoutRepository }) => {
-    const [savedWorkouts, setSavedWorkouts] = useState(workoutRepository.getAll());
-    const [editableWorkout, setEditableWorkout] = useState(null)
+    const [savedWorkouts, setSavedWorkouts] = useState([]);
+    const [editableWorkout, setEditableWorkout] = useState({ value: [] })
 
     const handleSave = (workout, id) => {
-        workoutRepository.save(workout, id);
-        setSavedWorkouts(workoutRepository.getAll());
-        setEditableWorkout(null)
+        workoutRepository.save(workout, id).then(
+            (newId) => setEditableWorkout({ value: [] }),
+        )
     }
 
-    let editor;
-    if (editableWorkout === null) {
-        editor = <WorkoutEditor key="create" initialWorkout={[]} onSave={handleSave} />
-    } else {
-        editor = <WorkoutEditor key="update" initialWorkout={editableWorkout.value} onSave={(w) => handleSave(w, editableWorkout.id)} />
-    }
+    useEffect(() => {
+        workoutRepository.getAll().then(setSavedWorkouts,
+            (e) => {
+                console.error(e)
+                setSavedWorkouts([])
+            })
+    }, [editableWorkout])
+
+    const editor = <WorkoutEditor key={`editor-${editableWorkout.id}`} initialWorkout={editableWorkout.value} onSave={(w) => handleSave(w, editableWorkout.id)} />
 
     return (<div>
         {editor}
-        <div>
-            <h3>Workout Library</h3>
-            <WorkoutLibrary workouts={savedWorkouts} onWorkoutSelected={setEditableWorkout} />
-        </div>
+        {savedWorkouts &&
+            <div>
+                <h3>Workout Library</h3>
+                <WorkoutLibrary workouts={savedWorkouts} onWorkoutSelected={setEditableWorkout} />
+            </div>
+        }
     </div>)
 }
 

@@ -1,6 +1,6 @@
 'use strict';
 import ReactDOM from 'react-dom';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const exercises = ["Back Squat", "Run", "Push-up"]
 
@@ -19,23 +19,23 @@ const WorkoutExercise = ({ name, note, onNoteUpdated }) => {
         onNoteUpdated(event.target.value)
     }
     return (
-    <li>
-        <label>
-            <input type='text' value={note} onChange={handleNoteUpdated} />
-            {name}
-        </label>
-    </li>
-)
-    }
+        <li>
+            <label>
+                <input type='text' value={note} onChange={handleNoteUpdated} />
+                {name}
+            </label>
+        </li>
+    )
+}
 
 const WorkoutEditor = ({ initialWorkout, onSave }) => {
     const [workout, setWorkout] = useState(initialWorkout)
 
     const handleSubmit = (event) => {
-        console.info("Saving workout...")
-        onSave(workout);
-        setWorkout([])
         event.preventDefault();
+        console.info("Saving workout...")
+        onSave(workout)
+        setWorkout([])
     }
 
     const appendToWorkout = exercise => {
@@ -45,7 +45,7 @@ const WorkoutEditor = ({ initialWorkout, onSave }) => {
 
     function handleNoteUpdated(idx, note) {
         const newWorkout = [...workout]
-        newWorkout[idx].note  = note
+        newWorkout[idx].note = note
         setWorkout(newWorkout)
     }
 
