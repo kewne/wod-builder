@@ -6,5 +6,5 @@ import "regenerator-runtime/runtime";
 import { inMemoryRepository } from './workout'
 import App from './components/app'
 
-const element = document.querySelector('#app');
+const element = document.querySelector('body');
 ReactDOM.render(<App repoPromise={inMemoryRepository()} />, element);
